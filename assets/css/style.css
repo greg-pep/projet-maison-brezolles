@@ -1,5 +1,7 @@
 :root {
     --primary-color: #00274d;
+    --activ-color: #ccd5fb;
+    --link-color: #8d90ef;
 }
 
 /* Layout */
@@ -82,12 +84,12 @@ footer {
     text-decoration: none;
 }
 .submenu li a:not(.active):hover {
-    color: #ccd5fb;
+    color: var(--activ-color);
     transform: scale(1.03);
     transition: transform 0.2s;
 }
 .submenu li a.active {
-    color: #ccd5fb;
+    color: var(--activ-color);
     font-weight: bold;
 }
 .submenu li a.active {
@@ -120,6 +122,9 @@ p {
 }
 .intro {
     margin-bottom: 20px;
+}
+.standard-link {
+    color: var(--link-color);
 }
 
 /* Table */
@@ -204,6 +209,10 @@ img:hover {
 }
 
 /* Buttons */
+.button:hover {
+    transform: scale(1.03);
+    transition: transform 0.2s;
+}
 .download-button {
     display: inline-block;
     margin-top: 15px;
