@@ -1,1 +1,67 @@
-test
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <base href="http://localhost:8000/">
+    <meta charset="UTF-8">
+    <title>Projet Immobilier – Maison à Brézolles</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script defer src="assets/js/script.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Projet de rénovation – Maison à Brézolles</h1> 
+        <div id="menu-placeholder"></div>
+    </header>
+
+    <main>
+        <section id="description" class="content-block section-box">
+            <h2>Description générale</h2>
+            <p class="intro">Toutes les pièces de cette maison seront rénovées. L’objectif est de moderniser l’ensemble et d’apporter davantage de lumière naturelle.</p>
+            <img src="assets/images/main_photo.jpg" alt="Maison" class="main-photo">
+        </section>
+        <section id="plans" class="content-block section-box">
+            <h2>Plans avec côtes</h2>
+            <p class="intro">Les plans ci-dessous illustrent les surfaces et agencements de la maison. Ils permettent de visualiser les transformations prévues pour chaque étage.</p>
+            <div class="plan-gallery">
+                <img src="assets/images/plan_page_1.png" alt="Plan 1">
+                <img src="assets/images/plan_page_2.png" alt="Plan 2">
+                <img src="assets/images/plan_page_3.png" alt="Plan 3">
+            </div>
+            <a href="images/Plan.pdf" download class="download-button">Télécharger le PDF des plans</a>
+        </section>
+        <section id="coordonnees" class="content-block section-box">
+            <h2>Coordonnées</h2>
+            <table class="contact-info">
+                <tbody>
+                  <tr>
+                    <td class="label">Noms</td>
+                    <td class="value">Mme Antoine Aurélia &amp; M. Jaklimovitch Gregory</td>
+                  </tr>
+                  <tr>
+                    <td class="label">Téléphone</td>
+                    <td class="value">06 51 41 96 97</td>
+                  </tr>
+                  <tr>
+                    <td class="label">Email</td>
+                    <td class="value"><a href="mailto:greg-ja@outlook.fr">greg-ja@outlook.fr</a></td>
+                  </tr>
+                  <tr>
+                    <td class="label">Ville</td>
+                    <td class="value">Brézolles, commune de Vernouillet</td>
+                  </tr>
+                </tbody>
+              </table>
+        </section>
+        <section id="resume" class="content-block section-box">
+            <h2>Résumé du projet</h2>
+            <a href="#" class="download-button">Télécharger le résumé PDF</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Projet Immobilier – Antoine & Jaklimovitch</p>
+    </footer>
+</body>
+</html>
