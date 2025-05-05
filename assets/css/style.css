@@ -8,7 +8,11 @@
     --submenu-max-height: 500px;
 }
 
+/*******************/
 /* Layout */
+body, body * {
+    box-sizing: border-box;
+}
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -19,6 +23,12 @@ header {
     color: white;
     text-align: center;
     background-color: var(--primary-color);
+}
+main {
+    margin: 0 auto;
+    max-width: 1100px;
+    padding: 0 20px;
+    width: 100%;
 }
 footer {
     background: #eee;
@@ -59,7 +69,7 @@ footer {
     position: inherit;
     width: 100%;
 }
-@media (min-width: 600px) {
+@media (min-width: 700px) {
     .menu > li {
         position: relative;
     }
@@ -97,7 +107,7 @@ footer {
         opacity var(--submenu-transition-duration) ease-out,
         transform var(--submenu-transition-duration) ease-out;
 }
-@media (min-width: 600px) {
+@media (min-width: 700px) {
     .submenu {
         width: 100%;
     }
@@ -111,7 +121,7 @@ footer {
     opacity: 1;
     transform: translateY(0);
 }
-@media (min-width: 600px) {
+@media (min-width: 700px) {
     .menu > li:hover > .submenu {
         max-height: var(--submenu-max-height);
         opacity: 1;
@@ -141,6 +151,31 @@ footer {
     font-weight: bold;
     transform: none;
     transition: none;
+}
+/* Submenu close button */
+.submenu-close-button {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 110%;
+    z-index: 10;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    background: none;
+    border: none;
+}
+.submenu-close-button:hover {
+    cursor: pointer;
+}
+.submenu-close-button.visible {
+    display: inline-block;
+}
+@media (min-width: 700px) {
+    .submenu-close-button,
+    .submenu-close-button.visible {
+        display: none;
+    }
 }
 
 /* Titles */
@@ -183,15 +218,9 @@ table .value {
 }
 
 /* Containers */
-main {
-    margin: 0 auto;
-    max-width: 1000px;
-    padding: 0 20px;
-}
 .section-box {
     border-radius: 10px;
     margin: 20px auto;
-    box-sizing: border-box;
 }
 .content-block,
 .text-list-block {
@@ -199,6 +228,11 @@ main {
     padding: 20px;
     background: #fff;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+@media (min-width: 700px) {
+    .photos-block {
+        background: url("../images/arrow.svg") center center / 20px 20px no-repeat;
+    }
 }
 .double-section-box {
     display: flex;
@@ -208,7 +242,7 @@ main {
 .double-section-box .section-box {
     margin: 0;
 }
-@media (min-width: 600px) {
+@media (min-width: 700px) {
     .double-section-box {
         flex-direction: row;
     }
@@ -217,6 +251,7 @@ main {
     }
     .double-section-box .text-list-block {
         flex: 1 1 0;
+        max-width: 330px;
     }
 }
 
@@ -244,30 +279,6 @@ ul li {
     border: none;
     padding-top: 0;
 }
-.content-block ul li .photos-block {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-.content-block ul li .photos-block div img {
-    width: 100%;
-    height: 300px;
-}
-.content-block ul li .photos-block p {
-    color: gray;
-    font-size: 14px;
-    margin: 5px 0;
-}
-@media (min-width: 600px) {
-    .content-block ul li .photos-block {
-        flex-direction: row;
-        justify-content: start;
-        gap: 60px;
-    }
-    .content-block ul li .photos-block div img {
-        width: 300px;
-    }
-}
 
 /* Images */
 img {
@@ -275,23 +286,13 @@ img {
     object-fit: cover;
     width: 300px;
     height: 300px;
+    max-width: 100%;
     cursor: pointer;
     border-radius: 7px;
 }
 img:hover {
     transform: scale(1.03);
     transition: transform 0.2s;
-}
-.main-photo {
-    width: 500px;
-    height: 400px;
-    display: block;
-    margin: 0 auto;
-}
-.plan-gallery {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
 }
 
 /* Buttons */
@@ -307,30 +308,6 @@ img:hover {
     color: white;
     text-decoration: none;
     border-radius: 4px;
-}
-.submenu-close-button {
-    display: none;
-    position: absolute;
-    right: 0;
-    top: 110%;
-    z-index: 10;
-    color: white;
-    font-size: 25px;
-    font-weight: bold;
-    background: none;
-    border: none;
-}
-.submenu-close-button:hover {
-    cursor: pointer;
-}
-.submenu-close-button.visible {
-    display: inline-block;
-}
-@media (min-width: 600px) {
-    .submenu-close-button,
-    .submenu-close-button.visible {
-        display: none;
-    }
 }
 
 /* Modal */
@@ -353,6 +330,8 @@ img:hover {
     height: auto;
     max-width: 90%;
     max-height: 90%;
+    height: 100%;
+    object-fit: contain;
     cursor: default;
     transition: inherit;
 }
@@ -369,4 +348,75 @@ img:hover {
     font-size: 35px;
     font-weight: bold;
     cursor: pointer;
+}
+
+/*******************/
+/* PAGES */
+/* Home page */
+.main-photo {
+    width: 500px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+@media (min-width: 600px) {
+    .main-photo {
+        height: 400px;
+    }
+}
+.plan-block {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+@media (min-width: 600px) {
+    .plan-block {
+        flex-direction: row;
+    }
+}
+.plan-block img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+@media (min-width: 600px) {
+    .plan-block img {
+        max-width: 30%;
+        max-height: 280px;
+    }
+}
+
+
+/* Rooms page */
+.photos-block {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.photos-block div img {
+    width: 100%;
+    height: 300px;
+}
+.photos-block p {
+    color: gray;
+    font-size: 14px;
+    margin: 5px 0;
+}
+@media (min-width: 700px) {
+    .photos-block {
+        flex-direction: row;
+        justify-content: start;
+        gap: 60px;
+    }
+    .photos-block div img {
+        width: 300px;
+        height: 150px;
+    }
+}
+@media (min-width: 900px) {
+    .photos-block div img {
+        height: 300px;
+    }
 }
