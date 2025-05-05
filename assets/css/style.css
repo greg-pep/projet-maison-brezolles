@@ -220,9 +220,22 @@ ul li {
 }
 .content-block ul li .photos-block {
     display: flex;
-    flex-direction: row;
-    justify-content: start;
-    gap: 60px;
+    flex-direction: column;
+    gap: 20px;
+}
+.content-block ul li .photos-block div img {
+    width: 100%;
+    height: 300px;
+}
+@media (min-width: 600px) {
+    .content-block ul li .photos-block {
+        flex-direction: row;
+        justify-content: start;
+        gap: 60px;
+    }
+    .content-block ul li .photos-block div img {
+        width: 300px;
+    }
 }
 
 /* Images */
