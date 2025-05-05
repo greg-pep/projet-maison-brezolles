@@ -1,3 +1,4 @@
+// script.js
 document.addEventListener("DOMContentLoaded", () => {
   fetch('menu.html')
     .then(r => {
@@ -18,12 +19,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function initSubmenuToggle() {
     const items = document.querySelectorAll('#main-nav .menu > li');
-    const closeBtn = document.querySelector('.submenu-close-button');
-
     items.forEach(li => {
       const link1 = li.querySelector(':scope > a');
       if (!link1) return;
       link1.addEventListener('click', e => {
+        if (window.innerWidth >= 600) return;    // only toggle under 600px
         e.preventDefault();
         e.stopPropagation();
         items.forEach(other => other.classList.remove('open'));
@@ -34,11 +34,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function initOutsideClickToClose() {
-    const items = document.querySelectorAll('#main-nav .menu > li');
     document.addEventListener('click', e => {
       const nav = document.getElementById('main-nav');
       if (!nav.contains(e.target)) {
-        items.forEach(li => li.classList.remove('open'));
+        document.querySelectorAll('#main-nav .menu > li.open')
+          .forEach(li => li.classList.remove('open'));
         updateCloseButton();
       }
     });
@@ -52,7 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
         .forEach(li => li.classList.remove('open'));
       updateCloseButton();
     });
-    // initial state
     updateCloseButton();
   }
 
@@ -73,14 +72,12 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.appendChild(modal);
     const modalImg = modal.querySelector('#modal-img');
     const closeBtn = modal.querySelector('.close');
-
     document.querySelectorAll('img').forEach(img => {
       img.addEventListener('click', () => {
         modal.style.display = 'block';
         modalImg.src = img.src;
       });
     });
-
     closeBtn.onclick = () => modal.style.display = 'none';
     window.addEventListener('click', e => {
       if (e.target === modal) modal.style.display = 'none';
@@ -92,7 +89,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const currentHash = window.location.hash;
     document.querySelectorAll('#main-nav a.active')
       .forEach(a => a.classList.remove('active'));
-
     const subLinks = document.querySelectorAll('#main-nav ul.submenu a');
     for (const a of subLinks) {
       const [path, hash] = a.getAttribute('href').split('#');

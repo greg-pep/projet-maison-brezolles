@@ -106,14 +106,20 @@ footer {
 .menu > li:hover {
     background-color: rgba(0, 0, 0, 0.6);
 }
-.menu > li:hover > .submenu,
 .menu > li.open > .submenu {
     max-height: var(--submenu-max-height);
     opacity: 1;
     transform: translateY(0);
 }
+@media (min-width: 600px) {
+    .menu > li:hover > .submenu {
+        max-height: var(--submenu-max-height);
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 .menu > li > a.active {
-    background-color: rgba(0, 0, 0, 0.6);
+    font-weight: bold;
     color: var(--hover-color);
 }
 .submenu li {
