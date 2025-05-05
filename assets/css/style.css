@@ -266,6 +266,9 @@ img:hover {
     background: none;
     border: none;
 }
+.submenu-close-button:hover {
+    cursor: pointer;
+}
 .submenu-close-button.visible {
     display: inline-block;
 }
@@ -292,9 +295,17 @@ img:hover {
 .modal-content {
     display: block;
     margin: auto;
+    width: auto;
+    height: auto;
     max-width: 90%;
     max-height: 90%;
     cursor: default;
+    transition: inherit;
+}
+.modal-content:hover {
+    cursor: default;
+    transition: none;
+    transform: none;
 }
 .close {
     position: absolute;
