@@ -281,16 +281,23 @@ ul li {
 }
 
 /* Images */
-img {
+img, video {
     display: block;
     object-fit: cover;
-    width: 300px;
-    height: 300px;
     max-width: 100%;
     cursor: pointer;
     border-radius: 7px;
+    background: #474545;
 }
-img:hover {
+img {
+    width: 300px;
+    height: 300px; 
+}
+video {
+    width: 280px;
+    height: 230px;
+}
+img:hover, video:hover {
     transform: scale(1.03);
     transition: transform 0.2s;
 }
@@ -390,33 +397,40 @@ img:hover {
 
 
 /* Rooms page */
-.photos-block {
+.media-block {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
-.photos-block div img {
+.media-block div img {
     width: 100%;
     height: 300px;
 }
-.photos-block p {
+.media-block p {
     color: gray;
     font-size: 14px;
     margin: 5px 0;
 }
 @media (min-width: 700px) {
-    .photos-block {
+    .media-block {
         flex-direction: row;
         justify-content: space-between;
         gap: 45px;
     }
-    .photos-block div img {
+    .media-block div img {
         width: 300px;
         height: 150px;
     }
 }
 @media (min-width: 900px) {
-    .photos-block div img {
+    .media-block div img {
         height: 300px;
     }
+}
+
+.content-block .video-box {
+    background: #e9efff;
+    padding: 20px;
+    border-radius: 7px;
+    border: none;
 }

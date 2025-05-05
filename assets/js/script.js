@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
       initOutsideClickToClose();
       initCloseButton();
       initModalImages();
+      initVideoHover();
       highlightActiveLink();
       initScrollObserver();
       initStickyNav();
@@ -23,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const link1 = li.querySelector(':scope > a');
       if (!link1) return;
       link1.addEventListener('click', e => {
-        if (window.innerWidth >= 600) return;    // only toggle under 600px
+        if (window.innerWidth >= 600) return;
         e.preventDefault();
         e.stopPropagation();
         items.forEach(other => other.classList.remove('open'));
@@ -56,10 +57,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updateCloseButton() {
-    const closeBtn = document.querySelector('.submenu-close-button');
-    if (!closeBtn) return;
+    const btn = document.querySelector('.submenu-close-button');
+    if (!btn) return;
     const anyOpen = !!document.querySelector('#main-nav .menu > li.open');
-    closeBtn.classList.toggle('visible', anyOpen);
+    btn.classList.toggle('visible', anyOpen);
   }
 
   function initModalImages() {
@@ -84,21 +85,30 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  function initVideoHover() {
+    document.querySelectorAll('video').forEach(video => {
+      video.addEventListener('mouseenter', () => {
+        video.play();
+      });
+      video.addEventListener('mouseleave', () => {
+        video.pause();
+        video.currentTime = 0;
+      });
+    });
+  }
+
   function highlightActiveLink() {
     const raw = window.location.pathname.split('/').pop().replace(/\.html$/, '');
-    const currentHash = window.location.hash;
+    const hash = window.location.hash;
     document.querySelectorAll('#main-nav a.active')
       .forEach(a => a.classList.remove('active'));
     const subLinks = document.querySelectorAll('#main-nav ul.submenu a');
     for (const a of subLinks) {
-      const [path, hash] = a.getAttribute('href').split('#');
-      const name = path.replace(/\.html$/, '');
-      const linkHash = hash ? `#${hash}` : '';
-      if (name === raw && (linkHash === currentHash || linkHash === '')) {
+      const [path, h] = a.getAttribute('href').split('#');
+      if (path.replace(/\.html$/, '') === raw && (`#${h}` || '') === hash) {
         a.classList.add('active');
         const parentLi = a.closest('ul.submenu').closest('li');
-        const parentLink = parentLi.querySelector(':scope > a');
-        parentLink?.classList.add('active');
+        parentLi.querySelector(':scope > a')?.classList.add('active');
         break;
       }
     }
@@ -107,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function initScrollObserver() {
     const sections = document.querySelectorAll('main section[id]');
     if (!('IntersectionObserver' in window)) return;
-    const observer = new IntersectionObserver(entries => {
+    const obs = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (!entry.isIntersecting) return;
         const id = entry.target.id;
@@ -116,20 +126,19 @@ document.addEventListener("DOMContentLoaded", () => {
           document.querySelectorAll('#main-nav a.active')
             .forEach(x => x.classList.remove('active'));
           a.classList.add('active');
-          const parentLi = a.closest('ul.submenu').closest('li');
-          parentLi.querySelector(':scope > a')?.classList.add('active');
+          a.closest('ul.submenu').closest('li')
+           .querySelector(':scope > a')?.classList.add('active');
         }
       });
     }, { rootMargin: '0px 0px -80% 0px' });
-    sections.forEach(sec => observer.observe(sec));
+    sections.forEach(s => obs.observe(s));
   }
 
   function initStickyNav() {
     const nav = document.getElementById('main-nav');
-    const offsetTop = nav.offsetTop;
+    const offset = nav.offsetTop;
     window.addEventListener('scroll', () => {
-      if (window.pageYOffset >= offsetTop) nav.classList.add('sticky');
-      else nav.classList.remove('sticky');
+      nav.classList.toggle('sticky', window.pageYOffset >= offset);
     });
   }
 });
