@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
       initSubmenuToggle();
       initOutsideClickToClose();
       initCloseButton();
-      initModalImages();
+      initModalMedia();
       initVideoHover();
       highlightActiveLink();
       initScrollObserver();
@@ -63,33 +63,49 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.classList.toggle('visible', anyOpen);
   }
 
-  function initModalImages() {
+  function initModalMedia() {
     const modal = document.createElement("div");
     modal.className = "modal";
     modal.innerHTML = `
       <span class="close">&times;</span>
-      <img class="modal-content" id="modal-img">
+      <div class="modal-content-wrapper"></div>
     `;
     document.body.appendChild(modal);
-    const modalImg = modal.querySelector('#modal-img');
+
+    const wrapper = modal.querySelector('.modal-content-wrapper');
     const closeBtn = modal.querySelector('.close');
+
+    // images
     document.querySelectorAll('img').forEach(img => {
       img.addEventListener('click', () => {
+        wrapper.innerHTML = `<img class="modal-content" src="${img.src}" alt="">`;
         modal.style.display = 'block';
-        modalImg.src = img.src;
       });
     });
-    closeBtn.onclick = () => modal.style.display = 'none';
+
+    // videos
+    document.querySelectorAll('.video-thumb video').forEach(video => {
+      video.addEventListener('click', () => {
+        wrapper.innerHTML = `<video class="modal-content" src="${video.src}" controls autoplay></video>`;
+        modal.style.display = 'block';
+      });
+    });
+
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+      wrapper.innerHTML = '';
+    });
     window.addEventListener('click', e => {
-      if (e.target === modal) modal.style.display = 'none';
+      if (e.target === modal) {
+        modal.style.display = 'none';
+        wrapper.innerHTML = '';
+      }
     });
   }
 
   function initVideoHover() {
-    document.querySelectorAll('video').forEach(video => {
-      video.addEventListener('mouseenter', () => {
-        video.play();
-      });
+    document.querySelectorAll('.video-thumb video').forEach(video => {
+      video.addEventListener('mouseenter', () => video.play());
       video.addEventListener('mouseleave', () => {
         video.pause();
         video.currentTime = 0;
