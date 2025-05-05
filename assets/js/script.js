@@ -1,4 +1,3 @@
-// script.js
 document.addEventListener("DOMContentLoaded", () => {
   fetch('menu.html')
     .then(r => {
@@ -15,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
       highlightActiveLink();
       initScrollObserver();
       initStickyNav();
+      initAccordion(); 
     })
     .catch(console.error);
 
@@ -75,7 +75,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const wrapper = modal.querySelector('.modal-content-wrapper');
     const closeBtn = modal.querySelector('.close');
 
-    // images
     document.querySelectorAll('img').forEach(img => {
       img.addEventListener('click', () => {
         wrapper.innerHTML = `<img class="modal-content" src="${img.src}" alt="">`;
@@ -83,7 +82,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    // videos
     document.querySelectorAll('.video-thumb video').forEach(video => {
       video.addEventListener('click', () => {
         wrapper.innerHTML = `<video class="modal-content" src="${video.src}" controls autoplay></video>`;
@@ -114,20 +112,28 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function highlightActiveLink() {
-    const raw = window.location.pathname.split('/').pop().replace(/\.html$/, '');
-    const hash = window.location.hash;
-    document.querySelectorAll('#main-nav a.active')
-      .forEach(a => a.classList.remove('active'));
-    const subLinks = document.querySelectorAll('#main-nav ul.submenu a');
-    for (const a of subLinks) {
-      const [path, h] = a.getAttribute('href').split('#');
-      if (path.replace(/\.html$/, '') === raw && (`#${h}` || '') === hash) {
-        a.classList.add('active');
-        const parentLi = a.closest('ul.submenu').closest('li');
-        parentLi.querySelector(':scope > a')?.classList.add('active');
-        break;
-      }
-    }
+    const currentPath = window.location.pathname.split('/').pop().replace(/\.html$/, '');
+    const currentHash = window.location.hash;
+    // clear
+    document.querySelectorAll('#main-nav a.active').forEach(a => a.classList.remove('active'));
+    // for each link
+    document.querySelectorAll('#main-nav a').forEach(a => {
+      try {
+        const url = new URL(a.getAttribute('href'), window.location.origin);
+        const linkPath = url.pathname.split('/').pop().replace(/\.html$/, '');
+        const linkHash = url.hash;
+        if (linkPath === currentPath && (linkHash === currentHash || (!linkHash && !currentHash))) {
+          a.classList.add('active');
+          // if submenu item, mark its parent
+          const sub = a.closest('ul.submenu');
+          if (sub) {
+            const parentLi = sub.closest('li');
+            const parentLink = parentLi.querySelector(':scope > a');
+            parentLink?.classList.add('active');
+          }
+        }
+      } catch {}
+    });
   }
 
   function initScrollObserver() {
@@ -139,11 +145,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const id = entry.target.id;
         const a = document.querySelector(`#main-nav ul.submenu a[href$="#${id}"]`);
         if (a) {
-          document.querySelectorAll('#main-nav a.active')
-            .forEach(x => x.classList.remove('active'));
+          document.querySelectorAll('#main-nav a.active').forEach(x => x.classList.remove('active'));
           a.classList.add('active');
-          a.closest('ul.submenu').closest('li')
-           .querySelector(':scope > a')?.classList.add('active');
+          const parentLi = a.closest('ul.submenu').closest('li');
+          parentLi.querySelector(':scope > a')?.classList.add('active');
         }
       });
     }, { rootMargin: '0px 0px -80% 0px' });
@@ -155,6 +160,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const offset = nav.offsetTop;
     window.addEventListener('scroll', () => {
       nav.classList.toggle('sticky', window.pageYOffset >= offset);
+    });
+  }
+
+  function initAccordion() {
+    const wrapper = document.querySelector('.project-wrapper');
+    const btn = wrapper.querySelector('.button-accordion');
+    btn.addEventListener('click', () => {
+      const isOpen = wrapper.classList.toggle('collapsed');
+      btn.setAttribute('aria-expanded', !isOpen);
+      btn.setAttribute('aria-label', isOpen ? 'Ouvrir le projet' : 'Fermer le projet');
     });
   }
 });
