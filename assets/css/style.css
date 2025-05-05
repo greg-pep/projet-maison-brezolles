@@ -407,8 +407,8 @@ img:hover {
 @media (min-width: 700px) {
     .photos-block {
         flex-direction: row;
-        justify-content: start;
-        gap: 60px;
+        justify-content: space-between;
+        gap: 45px;
     }
     .photos-block div img {
         width: 300px;
