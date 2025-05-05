@@ -1,13 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // 1. Charger et injecter le menu HTML
   fetch('menu.html')
-    .then(response => {
-      if (!response.ok) throw new Error('Impossible de charger le menu');
-      return response.text();
+    .then(r => {
+      if (!r.ok) throw new Error('Impossible de charger le menu');
+      return r.text();
     })
     .then(html => {
       document.getElementById('menu-placeholder').innerHTML = html;
-      initHoverSubmenu();
+      initSubmenuToggle();
+      initOutsideClickToClose();
+      initCloseButton();
       initModalImages();
       highlightActiveLink();
       initScrollObserver();
@@ -15,17 +16,53 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .catch(console.error);
 
-  // Hover pour ouvrir/fermer les sous-menus
-  function initHoverSubmenu() {
-    document.querySelectorAll('#main-nav .menu > li').forEach(li => {
-      const submenu = li.querySelector('.submenu');
-      if (!submenu) return;
-      li.addEventListener('mouseenter', () => submenu.classList.add('open'));
-      li.addEventListener('mouseleave', () => submenu.classList.remove('open'));
+  function initSubmenuToggle() {
+    const items = document.querySelectorAll('#main-nav .menu > li');
+    const closeBtn = document.querySelector('.submenu-close-button');
+
+    items.forEach(li => {
+      const link1 = li.querySelector(':scope > a');
+      if (!link1) return;
+      link1.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
+        items.forEach(other => other.classList.remove('open'));
+        li.classList.toggle('open');
+        updateCloseButton();
+      });
     });
   }
 
-  // Lightbox pour images
+  function initOutsideClickToClose() {
+    const items = document.querySelectorAll('#main-nav .menu > li');
+    document.addEventListener('click', e => {
+      const nav = document.getElementById('main-nav');
+      if (!nav.contains(e.target)) {
+        items.forEach(li => li.classList.remove('open'));
+        updateCloseButton();
+      }
+    });
+  }
+
+  function initCloseButton() {
+    const closeBtn = document.querySelector('.submenu-close-button');
+    if (!closeBtn) return;
+    closeBtn.addEventListener('click', () => {
+      document.querySelectorAll('#main-nav .menu > li.open')
+        .forEach(li => li.classList.remove('open'));
+      updateCloseButton();
+    });
+    // initial state
+    updateCloseButton();
+  }
+
+  function updateCloseButton() {
+    const closeBtn = document.querySelector('.submenu-close-button');
+    if (!closeBtn) return;
+    const anyOpen = !!document.querySelector('#main-nav .menu > li.open');
+    closeBtn.classList.toggle('visible', anyOpen);
+  }
+
   function initModalImages() {
     const modal = document.createElement("div");
     modal.className = "modal";
@@ -43,51 +80,54 @@ document.addEventListener("DOMContentLoaded", () => {
         modalImg.src = img.src;
       });
     });
+
     closeBtn.onclick = () => modal.style.display = 'none';
-    window.onclick = e => { if (e.target === modal) modal.style.display = 'none'; };
-  }
-
-  // Applique la classe active sur le <a> correspondant à la page courante
-  function highlightActiveLink() {
-    const raw = window.location.pathname.split('/').pop();
-    const currentName = raw.replace(/\.html$/, '');
-    const currentHash = window.location.hash;
-
-    document.querySelectorAll('#main-nav a.active').forEach(a => a.classList.remove('active'));
-
-    document.querySelectorAll('#main-nav a').forEach(a => {
-      const url = new URL(a.getAttribute('href'), window.location.origin);
-      const linkRaw = url.pathname.split('/').pop().replace(/\.html$/, '');
-      const linkHash = url.hash;
-
-      if (linkRaw === currentName && (linkHash === currentHash || linkHash === '')) {
-        a.classList.add('active');
-      }
+    window.addEventListener('click', e => {
+      if (e.target === modal) modal.style.display = 'none';
     });
   }
 
-  // Observer pour ancres internes
+  function highlightActiveLink() {
+    const raw = window.location.pathname.split('/').pop().replace(/\.html$/, '');
+    const currentHash = window.location.hash;
+    document.querySelectorAll('#main-nav a.active')
+      .forEach(a => a.classList.remove('active'));
+
+    const subLinks = document.querySelectorAll('#main-nav ul.submenu a');
+    for (const a of subLinks) {
+      const [path, hash] = a.getAttribute('href').split('#');
+      const name = path.replace(/\.html$/, '');
+      const linkHash = hash ? `#${hash}` : '';
+      if (name === raw && (linkHash === currentHash || linkHash === '')) {
+        a.classList.add('active');
+        const parentLi = a.closest('ul.submenu').closest('li');
+        const parentLink = parentLi.querySelector(':scope > a');
+        parentLink?.classList.add('active');
+        break;
+      }
+    }
+  }
+
   function initScrollObserver() {
     const sections = document.querySelectorAll('main section[id]');
     if (!('IntersectionObserver' in window)) return;
-
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.id;
-          const a = document.querySelector(`#main-nav a[href$="#${id}"]`);
-          if (a) {
-            document.querySelectorAll('#main-nav a.active').forEach(x => x.classList.remove('active'));
-            a.classList.add('active');
-          }
+        if (!entry.isIntersecting) return;
+        const id = entry.target.id;
+        const a = document.querySelector(`#main-nav ul.submenu a[href$="#${id}"]`);
+        if (a) {
+          document.querySelectorAll('#main-nav a.active')
+            .forEach(x => x.classList.remove('active'));
+          a.classList.add('active');
+          const parentLi = a.closest('ul.submenu').closest('li');
+          parentLi.querySelector(':scope > a')?.classList.add('active');
         }
       });
     }, { rootMargin: '0px 0px -80% 0px' });
-
     sections.forEach(sec => observer.observe(sec));
   }
 
-  // Sticky pour nav
   function initStickyNav() {
     const nav = document.getElementById('main-nav');
     const offsetTop = nav.offsetTop;
