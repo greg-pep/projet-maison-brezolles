@@ -186,6 +186,7 @@ table .value {
 main {
     margin: 0 auto;
     max-width: 1000px;
+    padding: 0 20px;
 }
 .section-box {
     border-radius: 10px;
@@ -203,9 +204,11 @@ ul {
     padding: 0;
     margin: 0;
 }
+ul li {
+    list-style: none;
+}
 .content-block ul li,
 .text-list-block ul li {
-    display: flex;
     width: 100%;
     border-top: 1px solid #d8d8d8;
     padding: 20px 0;
@@ -213,12 +216,13 @@ ul {
 .content-block ul li:first-child,
 .text-list-block ul li:first-child {
     border: none;
+    padding-top: 0;
 }
-.content-block ul li {
-    gap: 50px;
-    width: 100%;
-    align-items: center;
-    justify-content: space-evenly;
+.content-block ul li .photos-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    gap: 60px;
 }
 
 /* Images */
