@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
       initScrollObserver();
       initStickyNav();
       initAccordion();
-      initListBlockAccordion();    // <— Ajout de la bascule "expanded" pour les list-block
+      initListBlockAccordion();
       initEquipmentModals();
     })
     .catch(console.error);
@@ -196,7 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const modal = document.createElement("div");
     modal.className = "modal";
     modal.innerHTML = `
-      <span class="close">&times;</span>
+      <span class="close"><i class="fa-solid fa-xmark"></i></span>
       <div class="modal-content-wrapper"></div>
     `;
     document.body.appendChild(modal);

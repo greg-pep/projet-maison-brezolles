@@ -1,3 +1,5 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css");
+
 /* Variables */
 :root {
     --primary-color: #222;
@@ -334,6 +336,10 @@ img:hover, video:hover {
 .button-icon {
     font-size: 15px;
     padding: 3px 7px;
+    width: 35px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
     color: rgb(43, 43, 43);
     background-color: rgb(200, 200, 200);
 }
@@ -577,8 +583,14 @@ img:hover, video:hover {
 }
 .list-block .button-expand-mobile {
     top: 15vh;
-    right: 10px;
-    transform: scale(2.5);
+    right: 5vw;
+    transform: scale(2.7);
+}
+.list-block .button-expand-mobile .open-icn {
+    display: block;
+}
+.list-block .button-expand-mobile .close-icn {
+    display: none;
 }
 .project-wrapper:not(.collapsed) .list-block {
     position: fixed;
@@ -589,8 +601,8 @@ img:hover, video:hover {
     max-width: 93%;
 }
 .project-wrapper:not(.collapsed) .list-block ul {
-    overflow-y: scroll;
-    max-height: 74vh;
+    overflow-y: auto;
+    max-height: 80vh;
     padding-right: 15px;
 }
 .project-wrapper:not(.collapsed) .list-block .content-block-title,
@@ -606,6 +618,7 @@ img:hover, video:hover {
         position: inherit;
         left: inherit;
         top: inherit;
+        z-index: 1;
         width: 100%;
         max-width: 100%;
         background: var(--bg-color-primary);
@@ -628,6 +641,12 @@ img:hover, video:hover {
     top: inherit;
     right: inherit;
     transform: scale(1);
+}
+.project-wrapper:not(.collapsed) .list-block.expanded .button-expand-mobile .open-icn {
+    display: none;
+}
+.project-wrapper:not(.collapsed) .list-block.expanded .button-expand-mobile .close-icn {
+    display: block;
 }
 .project-wrapper:not(.collapsed) .list-block.expanded .content-block-title,
 .project-wrapper:not(.collapsed) .list-block.expanded ul {
