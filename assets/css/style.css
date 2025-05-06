@@ -20,6 +20,7 @@
     --active-color: #a8b9ff;
     --link-color: #8d90ef;
 
+    --layout-width: 1130px;
     --submenu-transition-duration: 0.25s;
     --submenu-max-height: 500px;
 }
@@ -49,7 +50,7 @@ header h1 {
 }
 main {
     margin: 0 auto;
-    max-width: 1130px;
+    max-width: var(--layout-width);
     min-height: 50vh;
     padding: 0 20px;
     width: 100%;
@@ -84,7 +85,7 @@ footer {
     padding: 0;
     margin: 0 auto;
     width: 100%;
-    max-width: 1000px;
+    max-width: var(--layout-width);
     list-style: none;
 }
 .menu > li {
