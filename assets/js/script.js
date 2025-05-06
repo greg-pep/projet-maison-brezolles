@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
       initAccordion();
       initListBlockAccordion();
       initEquipmentModals();
+      initReturnToTopButton();
     })
     .catch(console.error);
 
@@ -74,33 +75,26 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="modal-content-wrapper"></div>
     `;
     document.body.appendChild(modal);
-
     const wrapper = modal.querySelector('.modal-content-wrapper');
     const closeBtn = modal.querySelector('.close');
-
     function hide() {
       modal.style.display = 'none';
       wrapper.innerHTML = '';
     }
-
     closeBtn.addEventListener('click', hide);
     modal.addEventListener('click', e => {
-      if (
-        !e.target.closest('.modal-content') &&
-        !e.target.closest('.equipment-block') &&
-        e.target !== closeBtn
-      ) {
+      if (!e.target.closest('.modal-content') &&
+          !e.target.closest('.equipment-block') &&
+          e.target !== closeBtn) {
         hide();
       }
     });
-
     document.querySelectorAll('img').forEach(img => {
       img.addEventListener('click', () => {
         wrapper.innerHTML = `<img class="modal-content" src="${img.src}" alt="">`;
         modal.style.display = 'block';
       });
     });
-
     document.querySelectorAll('.video-thumb video').forEach(video => {
       video.addEventListener('click', () => {
         wrapper.innerHTML = `<video class="modal-content" src="${video.src}" controls autoplay></video>`;
@@ -147,8 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (a) {
           document.querySelectorAll('#main-nav a.active').forEach(x => x.classList.remove('active'));
           a.classList.add('active');
-          a.closest('ul.submenu').closest('li')
-           .querySelector(':scope > a')?.classList.add('active');
+          a.closest('ul.submenu').closest('li').querySelector(':scope > a')?.classList.add('active');
         }
       });
     }, { rootMargin: '0px 0px -80% 0px' });
@@ -166,23 +159,27 @@ document.addEventListener("DOMContentLoaded", () => {
   function initAccordion() {
     document.querySelectorAll('.project-wrapper').forEach(wrapper => {
       const btn = wrapper.querySelector('.button-accordion');
-      btn.setAttribute('aria-expanded', 'true');
-      btn.setAttribute('aria-label', 'Fermer le projet');
+      btn.setAttribute('aria-expanded', wrapper.classList.contains('collapsed') ? 'false' : 'true');
+      btn.setAttribute('aria-label', wrapper.classList.contains('collapsed') ? 'Ouvrir le projet' : 'Fermer le projet');
       btn.addEventListener('click', () => {
+        document.querySelectorAll('.project-wrapper').forEach(w => {
+          if (w !== wrapper) {
+            w.classList.add('collapsed');
+            const b = w.querySelector('.button-accordion');
+            if (b) {
+              b.setAttribute('aria-expanded', 'false');
+              b.setAttribute('aria-label', 'Ouvrir le projet');
+            }
+          }
+        });
         const collapsed = wrapper.classList.toggle('collapsed');
-        if (collapsed) {
-          btn.setAttribute('aria-expanded', 'false');
-          btn.setAttribute('aria-label', 'Ouvrir le projet');
-        } else {
-          btn.setAttribute('aria-expanded', 'true');
-          btn.setAttribute('aria-label', 'Fermer le projet');
-        }
+        btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+        btn.setAttribute('aria-label', collapsed ? 'Ouvrir le projet' : 'Fermer le projet');
       });
     });
   }
 
   function initListBlockAccordion() {
-    // Bascule la classe "expanded" uniquement sur le .content-block.list-block parent
     document.querySelectorAll('.content-block.list-block').forEach(container => {
       const btn = container.querySelector('.button-accordion');
       if (!btn) return;
@@ -196,30 +193,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const modal = document.createElement("div");
     modal.className = "modal";
     modal.innerHTML = `
-      <span class="close"><i class="fa-solid fa-xmark"></i></span>
+      <span class="close">&times;</span>
       <div class="modal-content-wrapper"></div>
     `;
     document.body.appendChild(modal);
-
     const wrapper = modal.querySelector('.modal-content-wrapper');
     const closeBtn = modal.querySelector('.close');
-
     function hide() {
       modal.style.display = 'none';
       wrapper.innerHTML = '';
     }
-
     closeBtn.addEventListener('click', hide);
     modal.addEventListener('click', e => {
-      if (
-        !e.target.closest('.modal-content') &&
-        !e.target.closest('.equipment-block') &&
-        e.target !== closeBtn
-      ) {
+      if (!e.target.closest('.modal-content') &&
+          !e.target.closest('.equipment-block') &&
+          e.target !== closeBtn) {
         hide();
       }
     });
-
     document.querySelectorAll('.list-block-line').forEach(line => {
       const btn = line.querySelector('.button-equipment');
       const list = line.querySelector('ul.equipments-list');
@@ -229,16 +220,12 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         e.stopPropagation();
         wrapper.innerHTML = '';
-
-        // création de la pop-in "Matériels"
         const block = document.createElement('div');
         block.classList.add('content-block','equipment-block');
         const title = document.createElement('h3');
         title.className = 'content-block-title';
         title.textContent = 'Matériels pour ce chantier';
         block.appendChild(title);
-
-        // reconstruction de la liste avec styles existants
         const ul = document.createElement('ul');
         list.querySelectorAll('li').forEach(rawItem => {
           const text = rawItem.querySelector('p')?.textContent || '';
@@ -265,6 +252,21 @@ document.addEventListener("DOMContentLoaded", () => {
         wrapper.appendChild(block);
         modal.style.display = 'block';
       });
+    });
+  }
+
+  function initReturnToTopButton() {
+    const btn = document.createElement('button');
+    btn.className = 'button-accordion button-icon button button-return-to-top';
+    btn.setAttribute('aria-label', 'Retour en haut');
+    btn.innerHTML = '<i class="fa-solid fa-arrow-up"></i>';
+    btn.style.opacity = 0;
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    document.body.appendChild(btn);
+    window.addEventListener('scroll', () => {
+      btn.style.opacity = window.pageYOffset > 200 ? '1' : '0';
     });
   }
 });
