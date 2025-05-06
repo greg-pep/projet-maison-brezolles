@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
       initScrollObserver();
       initStickyNav();
       initAccordion();
+      initListBlockAccordion();    // <— Ajout de la bascule "expanded" pour les list-block
       initEquipmentModals();
     })
     .catch(console.error);
@@ -84,7 +85,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     closeBtn.addEventListener('click', hide);
     modal.addEventListener('click', e => {
-      // si on n'est ni sur un media (img/video) ni sur la croix, on ferme
       if (
         !e.target.closest('.modal-content') &&
         !e.target.closest('.equipment-block') &&
@@ -166,20 +166,28 @@ document.addEventListener("DOMContentLoaded", () => {
   function initAccordion() {
     document.querySelectorAll('.project-wrapper').forEach(wrapper => {
       const btn = wrapper.querySelector('.button-accordion');
-      wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
       btn.setAttribute('aria-expanded', 'true');
       btn.setAttribute('aria-label', 'Fermer le projet');
       btn.addEventListener('click', () => {
         const collapsed = wrapper.classList.toggle('collapsed');
         if (collapsed) {
-          wrapper.style.maxHeight = '5rem';
           btn.setAttribute('aria-expanded', 'false');
           btn.setAttribute('aria-label', 'Ouvrir le projet');
         } else {
-          wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
           btn.setAttribute('aria-expanded', 'true');
           btn.setAttribute('aria-label', 'Fermer le projet');
         }
+      });
+    });
+  }
+
+  function initListBlockAccordion() {
+    // Bascule la classe "expanded" uniquement sur le .content-block.list-block parent
+    document.querySelectorAll('.content-block.list-block').forEach(container => {
+      const btn = container.querySelector('.button-accordion');
+      if (!btn) return;
+      btn.addEventListener('click', () => {
+        container.classList.toggle('expanded');
       });
     });
   }
@@ -221,6 +229,7 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         e.stopPropagation();
         wrapper.innerHTML = '';
+
         // création de la pop-in "Matériels"
         const block = document.createElement('div');
         block.classList.add('content-block','equipment-block');
@@ -228,6 +237,7 @@ document.addEventListener("DOMContentLoaded", () => {
         title.className = 'content-block-title';
         title.textContent = 'Matériels pour ce chantier';
         block.appendChild(title);
+
         // reconstruction de la liste avec styles existants
         const ul = document.createElement('ul');
         list.querySelectorAll('li').forEach(rawItem => {
