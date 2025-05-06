@@ -16,66 +16,170 @@
     </header>
 
     <main>
-        <section class="sub-title-block section-box">
-            <h2>Étage / Chambre 4</h2>
-        </section>
+        <p class="breadcrumb">Étage > <strong>Chambre 4</strong></p>
+        
+        <div class="project-wrapper">
+            <div class="project-wrapper-top">
+                <h2 class="project-wrapper-title">Chantier 1 : Bla bla et bla bla</h2>
+                <button class="button-accordion button-icon button" aria-expanded="true" aria-label="Fermer le projet">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path d="M6 15l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
 
-        <section class="double-section-box">
-            <section class="content-block section-box">
-                <h3>Visuels</h3>
-                <ul>
-                    <li class="image-box">
-                        <p><strong>Vue 01</strong></p>
-                        <div class="media-block">
-                            <div>
+            <div class="double-section-wrapper">         
+                <section class="content-block">
+                    <h3 class="content-block-title">Visuels</h3>
+                    <ul>
+                        <li class="media-wrapper">
+                            <p class="media-block-title"><strong>Vue 01</strong></p>
+                            <div class="media-block">
+                                <div>
+                                    <p>Avant :</p>
+                                    <img src="assets/images/etage - chambre4 A - AVANT.jpg" alt="Avant">
+                                </div>
+                                <div>
+                                    <p>Après :</p>
+                                    <img src="assets/images/etage - chambre4 A - APRES.jpeg" alt="Après">
+                                </div>
+                            </div>
+                        </li>
+                        <li class="media-wrapper">
+                            <p class="media-block-title"><strong>Vue 02</strong></p>
+                            <div class="media-block">
+                                <div>
+                                    <p>Avant :</p>
+                                    <img src="assets/images/etage - chambre4 B - AVANT.jpg" alt="Avant">
+                                </div>
+                                <div>
+                                    <p>Après :</p>
+                                    <img src="assets/images/etage - chambre4 B - APRES.jpeg" alt="Après">
+                                </div>
+                            </div>
+                        </li>
+                        <li class="media-wrapper video-wrapper">
+                            <p class="media-block-title"><strong>Vue 360°</strong></p>
+                            <div class="media-block">
+                            <div class="video-thumb">
                                 <p>Avant :</p>
-                                <img src="assets/images/etage - chambre4 A - AVANT.jpg" alt="Avant">
+                                <video
+                                src="assets/videos/rdc-salon-360-AVANT.mp4"
+                                muted
+                                autoplay
+                                loop
+                                preload="metadata"
+                                ></video>
                             </div>
-                            <div>
+                            <div class="video-thumb">
                                 <p>Après :</p>
-                                <img src="assets/images/etage - chambre4 A - APRES.jpeg" alt="Après">
+                                <video
+                                src="assets/videos/rdc - salon 360 - APRES.mp4"
+                                muted
+                                autoplay
+                                loop
+                                preload="metadata"
+                                ></video>
                             </div>
-                        </div>
-                    </li>
-                    <li class="image-box">
-                        <p><strong>Vue 02</strong></p>
-                        <div class="media-block">
-                            <div>
-                                <p>Avant :</p>
-                                <img src="assets/images/etage - chambre4 B - AVANT.jpg" alt="Avant">
                             </div>
-                            <div>
-                                <p>Après :</p>
-                                <img src="assets/images/etage - chambre4 B - APRES.jpeg" alt="Après">
+                        </li>
+                    </ul>
+                </section>
+                <section class="content-block list-block">
+                    <h3 class="content-block-title">Travaux à prévoir</h3>
+                    <ul>
+                        <li class="list-block-line">
+                            <div class="list-block-text">
+                                <p>
+                                    Lorem lipsum danaram it carassi dolum pan itsu da
+                                    lorem lipsum danaram it carassi dolum pan itsu da
+                                </p>
                             </div>
-                        </div>
-                    </li>
-                </ul>
-            </section>
-            <section class="text-list-block section-box">
-                <h3>Tâches à prévoir</h3>
-                <ul>
-                    <li>Reprise du sol</li>
-                    <li>Peinture et décoration</li>
-                    <li>Installation électrique</li>
-                    <li>Ajout de mobilier</li>
-                </ul>
-            </section>
-        </section>
-
-        <section class="content-block section-box">
-            <h3>Vidéo 360</h3>
-            <p>Insérer ici les vidéos avant et après (non fournies).</p>
-        </section>
-
-        <section class="text-list-block section-box">
-            <h3>Matériaux et achats</h3>
-            <ul>
-                <li>Parquet chêne clair – <a href="#">ref Leroy Merlin</a></li>
-                <li>Peinture blanche mate – <a href="#">ref Castorama</a></li>
-                <li>Appliques murales LED – <a href="#">ref Amazon</a></li>
-            </ul>
-        </section>
+                            <div class="list-block-btn">
+                                <a class="button-equipment button-small button" href="#" title="Voir le matériel">Matériels</a>
+                            </div>
+                            <!-- Matériels -->
+                            <ul class="equipments-list">
+                                <li>
+                                    <p>Lorem lipsum danaram it carassi 11111</p>
+                                    <a href="#">Aller sur le site</a>
+                                </li>
+                                <li>
+                                    <p>Lorem lipsum danaram it carassi 1111111</p>
+                                    <a href="#">Aller sur le site</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="list-block-line">
+                            <div class="list-block-text">
+                                <p>
+                                    Lorem lipsum danaram it carassi dolum pan itsu da
+                                    lorem lipsum danaram it carassi dolum pan itsu da
+                                </p>
+                            </div>
+                            <div class="list-block-btn">
+                                <a class="button-equipment button-small button" href="#" title="Voir le matériel">Matériels</a>
+                            </div>
+                            <!-- Matériels -->
+                            <ul class="equipments-list">
+                                <li>
+                                    <p>Lorem lipsum danaram it carassi 222222</p>
+                                    <a href="#">Aller sur le site</a>
+                                </li>
+                                <li>
+                                    <p>Lorem lipsum danaram it carassi 2222</p>
+                                    <a href="#">Aller sur le site</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="list-block-line">
+                            <div class="list-block-text">
+                                <p>
+                                    Lorem lipsum danaram it carassi dolum pan itsu da
+                                    lorem lipsum danaram it carassi dolum pan itsu da
+                                </p>
+                            </div>
+                            <div class="list-block-btn">
+                                <a class="button-equipment button-small button" href="#" title="Voir le matériel">Matériels</a>
+                            </div>
+                            <!-- Matériels -->
+                            <ul class="equipments-list">
+                                <li>
+                                    <p>Lorem lipsum danaram it carassi 33333</p>
+                                    <a href="#">Aller sur le site</a>
+                                </li>
+                                <li>
+                                    <p>Lorem lipsum danaram it carassi 3333</p>
+                                    <a href="#">Aller sur le site</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="list-block-line">
+                            <div class="list-block-text">
+                                <p>
+                                    Lorem lipsum danaram it carassi dolum pan itsu da
+                                    lorem lipsum danaram it carassi dolum pan itsu da
+                                </p>
+                            </div>
+                            <div class="list-block-btn">
+                                <a class="button-equipment button-small button" href="#" title="Voir le matériel">Matériels</a>
+                            </div>
+                            <!-- Matériels -->
+                            <ul class="equipments-list">
+                                <li>
+                                    <p>Lorem lipsum danaram it carassi 44444</p>
+                                    <a href="#">Aller sur le site</a>
+                                </li>
+                                <li>
+                                    <p>Lorem lipsum danaram it carassi 44444</p>
+                                    <a href="#">Aller sur le site</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </div>
     </main>
 
     <footer>
