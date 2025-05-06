@@ -6,6 +6,9 @@
     --secondary-color: #72a2c4;
     --tertiary-color: #7a7a7a;
 
+    --light-color: white;
+    --dark-lighter-color: #eee; 
+
     --header-color: #00274d;
     --nav-menu-color: #004080;
 
@@ -28,13 +31,13 @@ body, body * {
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    background-color: #f7f6f6;
+    background-color: var(--bg-color-primary);
     color: var(--primary-color);
 }
 header {
     position: relative;
     padding-top: 15px;
-    color: white;
+    color: var(--light-color);
     text-align: center;
     background-color: var(--header-color);
 }
@@ -51,10 +54,10 @@ main {
     width: 100%;
 }
 footer {
-    background: #eee;
     text-align: center;
     padding: 10px;
     margin-top: 40px;
+    background: var(--dark-lighter-color);
 }
 
 /* Sticky nav */
@@ -102,7 +105,7 @@ footer {
     font-size: 18px;
     padding: 13px 15px;
     width: 100%;
-    color: white;
+    color: var(--light-color);
     cursor: pointer;
     text-align: center;
     text-decoration: none;
@@ -297,7 +300,8 @@ img, video {
 }
 img {
     width: 300px;
-    height: 300px; 
+    height: 300px;
+    background: var(--dark-lighter-color);
 }
 video {
     width: 280px;
