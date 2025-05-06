@@ -27,7 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!link1) return;
       link1.addEventListener('click', e => {
         if (window.innerWidth >= 600) return;
-        e.preventDefault(); e.stopPropagation();
+        e.preventDefault();
+        e.stopPropagation();
         items.forEach(other => other.classList.remove('open'));
         li.classList.toggle('open');
         updateCloseButton();
@@ -72,6 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="modal-content-wrapper"></div>
     `;
     document.body.appendChild(modal);
+
     const wrapper = modal.querySelector('.modal-content-wrapper');
     const closeBtn = modal.querySelector('.close');
 
@@ -82,7 +84,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     closeBtn.addEventListener('click', hide);
     modal.addEventListener('click', e => {
-      if (!e.target.closest('.modal-content-wrapper')) hide();
+      // si on n'est ni sur un media (img/video) ni sur la croix, on ferme
+      if (
+        !e.target.closest('.modal-content') &&
+        !e.target.closest('.equipment-block') &&
+        e.target !== closeBtn
+      ) {
+        hide();
+      }
     });
 
     document.querySelectorAll('img').forEach(img => {
@@ -91,6 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
         modal.style.display = 'block';
       });
     });
+
     document.querySelectorAll('.video-thumb video').forEach(video => {
       video.addEventListener('click', () => {
         wrapper.innerHTML = `<video class="modal-content" src="${video.src}" controls autoplay></video>`;
@@ -121,10 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (linkPath === currentPath && (linkHash === currentHash || (!linkHash && !currentHash))) {
           a.classList.add('active');
           const sub = a.closest('ul.submenu');
-          if (sub) {
-            const parentLi = sub.closest('li');
-            parentLi.querySelector(':scope > a')?.classList.add('active');
-          }
+          if (sub) sub.closest('li').querySelector(':scope > a')?.classList.add('active');
         }
       } catch {}
     });
@@ -185,6 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="modal-content-wrapper"></div>
     `;
     document.body.appendChild(modal);
+
     const wrapper = modal.querySelector('.modal-content-wrapper');
     const closeBtn = modal.querySelector('.close');
 
@@ -195,7 +203,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     closeBtn.addEventListener('click', hide);
     modal.addEventListener('click', e => {
-      if (!e.target.closest('.modal-content-wrapper')) hide();
+      if (
+        !e.target.closest('.modal-content') &&
+        !e.target.closest('.equipment-block') &&
+        e.target !== closeBtn
+      ) {
+        hide();
+      }
     });
 
     document.querySelectorAll('.list-block-line').forEach(line => {
@@ -204,17 +218,20 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!btn || !list) return;
       list.style.display = 'none';
       btn.addEventListener('click', e => {
-        e.preventDefault(); e.stopPropagation();
+        e.preventDefault();
+        e.stopPropagation();
         wrapper.innerHTML = '';
+        // création de la pop-in "Matériels"
         const block = document.createElement('div');
         block.classList.add('content-block','equipment-block');
         const title = document.createElement('h3');
         title.className = 'content-block-title';
         title.textContent = 'Matériels pour ce chantier';
         block.appendChild(title);
-        // reconstruire chaque ligne
+        // reconstruction de la liste avec styles existants
+        const ul = document.createElement('ul');
         list.querySelectorAll('li').forEach(rawItem => {
-          const text = rawItem.querySelector('p')?.textContent||'';
+          const text = rawItem.querySelector('p')?.textContent || '';
           const link = rawItem.querySelector('a');
           const li = document.createElement('li');
           li.className = 'list-block-line';
@@ -227,13 +244,14 @@ document.addEventListener("DOMContentLoaded", () => {
           divBtn.className = 'list-block-btn';
           const a = document.createElement('a');
           a.className = 'link';
-          a.href = link?.href||'#';
-          a.textContent = link?.textContent||'';
+          a.href = link?.href || '#';
+          a.textContent = link?.textContent || '';
           divBtn.appendChild(a);
           li.appendChild(divText);
           li.appendChild(divBtn);
-          block.appendChild(li);
+          ul.appendChild(li);
         });
+        block.appendChild(ul);
         wrapper.appendChild(block);
         modal.style.display = 'block';
       });

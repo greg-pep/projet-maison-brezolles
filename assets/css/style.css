@@ -349,6 +349,7 @@ img:hover, video:hover {
 }
 .modal-content-wrapper {
     height: 100%;
+    padding: 20px;
 }
 .modal-content {
     display: block;
@@ -558,6 +559,7 @@ img:hover, video:hover {
 }
 .equipment-block {
     width: 700px;
+    max-width: 100%;
     margin: 0 auto;
 }
 .equipment-block .list-block-line {
