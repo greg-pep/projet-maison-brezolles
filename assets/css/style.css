@@ -4,6 +4,7 @@
 :root {
     --primary-color: #222;
     --secondary-color: #72a2c4;
+    --secondary-color-on-dark: #9ac5e3;
     --tertiary-color: #7a7a7a;
 
     --light-color: white;
@@ -16,7 +17,7 @@
     --bg-color-secondary: #e0dcdc;
     --bg-color-tertiary: #e9efff;
 
-    --active-color: #ccd5fb;
+    --active-color: #a8b9ff;
     --link-color: #8d90ef;
 
     --submenu-transition-duration: 0.25s;
@@ -37,12 +38,12 @@ body {
 header {
     position: relative;
     padding-top: 15px;
-    color: var(--light-color);
+    color: var(--secondary-color-on-dark);
     text-align: center;
     background-color: var(--header-color);
 }
 header h1 {
-    font-size: 17px;
+    font-size: 18px;
     margin-bottom: 15px;
     font-weight: normal;
 }
@@ -486,7 +487,7 @@ img:hover, video:hover {
 }
 .project-wrapper-title {
     margin-bottom: 15px;
-    font-size: 19px;
+    font-size: 23px;
 }
 .project-wrapper .button-accordion {
     position: absolute;
@@ -539,26 +540,28 @@ img:hover, video:hover {
     font-size: 14px;
     margin: 5px 0;
 }
-@media (min-width: 700px) {
+@media (min-width: 680px) {
     .media-block {
         flex-direction: row;
         justify-content: space-between;
         gap: 45px;
     }
     .media-block div img {
-        width: 300px;
+        width: 150px;
         height: 150px;
     }
     .media-block div video {
-        width: 300px;
+        width: 150px;
         height: 130px;
     }
 }
 @media (min-width: 900px) {
     .media-block div img {
+        width: 300px;
         height: 300px;
     }
     .media-block div video {
+        width: 300px;
         height: 230px;
     }
 }
@@ -634,32 +637,8 @@ img:hover, video:hover {
     height: 0;
     transition: opacity 1s ease;
 }
-@media (min-width: 680px) {
-    .project-wrapper:not(.collapsed) .list-block .content-block-title,
-    .project-wrapper:not(.collapsed) .content-block.list-block ul {
-        opacity: 1;
-        height: auto;
-        overflow-y: visible;
-    }
-    .project-wrapper:not(.collapsed) .list-block {
-        position: inherit;
-        left: inherit;
-        top: inherit;
-        z-index: 1;
-        width: 100%;
-        max-width: 100%;
-        padding: 20px;
-        background: var(--bg-color-primary);
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    .project-wrapper:not(.collapsed) .list-block ul {
-        overflow-y: auto;
-        max-height: inherit;
-        padding-right: 0;
-    }
-    .project-wrapper:not(.collapsed) .list-block .button-icon {
-        display: none;
-    }
+.project-wrapper:not(.collapsed) .list-block .list-block-top {
+    height: 0;
 }
 /* Expanded */
 .project-wrapper:not(.collapsed) .list-block.expanded {
@@ -685,10 +664,40 @@ img:hover, video:hover {
 .project-wrapper:not(.collapsed) .list-block.expanded .button-expand-mobile .close-icn {
     display: block;
 }
+.project-wrapper:not(.collapsed) .list-block.expanded .list-block-top,
 .project-wrapper:not(.collapsed) .list-block.expanded .content-block-title,
 .project-wrapper:not(.collapsed) .list-block.expanded ul {
     opacity: 1;
     height: auto;
+}
+@media (min-width: 680px) {
+    .project-wrapper:not(.collapsed) .list-block .list-block-top,
+    .project-wrapper:not(.collapsed) .list-block .content-block-title,
+    .project-wrapper:not(.collapsed) .content-block.list-block ul {
+        opacity: 1;
+        height: auto;
+        overflow-y: visible;
+    }
+    .project-wrapper:not(.collapsed) .list-block,
+    .project-wrapper:not(.collapsed) .list-block.expanded {
+        position: inherit;
+        left: inherit;
+        top: inherit;
+        z-index: 1;
+        width: 100%;
+        max-width: 100%;
+        padding: 20px;
+        background: var(--bg-color-primary);
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .project-wrapper:not(.collapsed) .list-block ul {
+        overflow-y: auto;
+        max-height: inherit;
+        padding-right: 0;
+    }
+    .project-wrapper:not(.collapsed) .list-block .button-icon {
+        display: none;
+    }
 }
 
 .equipments-list {
