@@ -37,7 +37,7 @@ header {
 }
 main {
     margin: 0 auto;
-    max-width: 1100px;
+    max-width: 1130px;
     min-height: 50vh;
     padding: 0 20px;
     width: 100%;
@@ -216,7 +216,12 @@ p {
     margin-bottom: 20px;
 }
 .link {
+    transition: transform 0.3s ease;
+    transform: scale(1);
     color: var(--link-color);
+}
+.link:hover {
+    transform: scale(1.05);
 }
 
 /* Table */
@@ -255,7 +260,7 @@ table .value {
     border-radius: 10px;
     padding: 20px;
     margin-top: 20px;
-    background: #fff;
+    background: var(--bg-color-primary);
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 .content-block-title {
@@ -264,15 +269,12 @@ table .value {
 
 
 /* Lists */
-ul {
+ul, ol {
     padding: 0;
     margin: 0;
 }
-ul li {
+ul li, ol li {
     list-style: none;
-}
-.list-block ul li {
-    padding: 5px 0;
 }
 
 /* Media */
@@ -299,25 +301,37 @@ img:hover, video:hover {
 
 /* Buttons */
 .button {
+    display: inline-flex;
     margin: 0;
     padding: 0;
-    cursor: pointer;
     border: none;
     border-radius: 7px;
     background: none;
+    text-decoration: none;
     transition: transform 0.3s ease;
+    transform: scale(1);
 }
 .button:hover {
-    transform: scale(1.03);
+    cursor: pointer;
+    transform: scale(1.05);
 }
-.button-download {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 10px 20px;
-    background: #0077cc;
+.button-middle, .button-small {
     color: white;
-    text-decoration: none;
-    border-radius: 4px;
+    background: #0077cc;
+}
+.button-middle {
+    font-size: 16px;
+    padding: 10px 20px;
+}
+.button-small {
+    font-size: 13px;
+    padding: 5px 7px;
+}
+.button-icon {
+    font-size: 15px;
+    padding: 3px 7px;
+    color: rgb(43, 43, 43);
+    background-color: rgb(200, 200, 200);
 }
 
 /* Modal */
@@ -412,6 +426,7 @@ img:hover, video:hover {
 
 .project-wrapper {
     padding: 25px 15px;
+    margin-top: 20px;
     border-radius: 7px;
     position: relative;
     overflow: hidden;
@@ -427,14 +442,10 @@ img:hover, video:hover {
     margin-bottom: 15px;
     font-size: 19px;
 }
-.button-accordion {
+.project-wrapper .button-accordion {
     position: absolute;
     top: 20px;
     right: 15px;
-    font-size: 15px;
-    padding: 3px 7px;
-    color: rgb(43, 43, 43);
-    background-color: rgb(200, 200, 200);
 }
 .project-wrapper.collapsed .button-accordion {
     transform: rotate(180deg);
@@ -473,6 +484,10 @@ img:hover, video:hover {
     width: 100%;
     height: 300px;
 }
+.media-block div video {
+    width: 100%;
+    height: 230px;
+}
 .media-block p {
     color: gray;
     font-size: 14px;
@@ -488,9 +503,69 @@ img:hover, video:hover {
         width: 300px;
         height: 150px;
     }
+    .media-block div video {
+        width: 300px;
+        height: 130px;
+    }
 }
 @media (min-width: 900px) {
     .media-block div img {
         height: 300px;
     }
+    .media-block div video {
+        height: 230px;
+    }
+}
+
+.list-block ul {
+    counter-reset: list-counter;
+}
+.list-block-line {
+    counter-increment: list-counter;
+    position: relative;
+    padding: 10px 0 10px 20px;
+    display: flex;
+    flex-direction: row;
+    border-top: 1px solid #d8d8d8;
+}
+.list-block-line::before {
+    content: counter(list-counter) ".";
+    position: absolute;
+    left: 0;
+    top: 10px;
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+.list-block-line:first-child {
+    border-top: none;
+    padding-top: 0;
+}
+.list-block-line:first-child::before {
+    top: 0;
+}
+.list-block-text {
+    width: 100%;
+    padding-right: 15px;
+    font-size: 14px;
+}
+.list-block-btn {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+.equipments-list {
+    display: none;
+}
+.equipment-block {
+    width: 700px;
+    margin: 0 auto;
+}
+.equipment-block .list-block-line {
+    padding: 10px 5px;
+}
+.equipment-block .list-block-line::before {
+    content: '';
+}
+.equipment-block .list-block-btn {
+    width: 130px;
 }

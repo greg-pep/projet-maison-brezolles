@@ -1,3 +1,4 @@
+// script.js
 document.addEventListener("DOMContentLoaded", () => {
   fetch('menu.html')
     .then(r => {
@@ -14,7 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
       highlightActiveLink();
       initScrollObserver();
       initStickyNav();
-      initAccordion(); 
+      initAccordion();
+      initEquipmentModals();
     })
     .catch(console.error);
 
@@ -25,8 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!link1) return;
       link1.addEventListener('click', e => {
         if (window.innerWidth >= 600) return;
-        e.preventDefault();
-        e.stopPropagation();
+        e.preventDefault(); e.stopPropagation();
         items.forEach(other => other.classList.remove('open'));
         li.classList.toggle('open');
         updateCloseButton();
@@ -71,9 +72,18 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="modal-content-wrapper"></div>
     `;
     document.body.appendChild(modal);
-
     const wrapper = modal.querySelector('.modal-content-wrapper');
     const closeBtn = modal.querySelector('.close');
+
+    function hide() {
+      modal.style.display = 'none';
+      wrapper.innerHTML = '';
+    }
+
+    closeBtn.addEventListener('click', hide);
+    modal.addEventListener('click', e => {
+      if (!e.target.closest('.modal-content-wrapper')) hide();
+    });
 
     document.querySelectorAll('img').forEach(img => {
       img.addEventListener('click', () => {
@@ -81,23 +91,11 @@ document.addEventListener("DOMContentLoaded", () => {
         modal.style.display = 'block';
       });
     });
-
     document.querySelectorAll('.video-thumb video').forEach(video => {
       video.addEventListener('click', () => {
         wrapper.innerHTML = `<video class="modal-content" src="${video.src}" controls autoplay></video>`;
         modal.style.display = 'block';
       });
-    });
-
-    closeBtn.addEventListener('click', () => {
-      modal.style.display = 'none';
-      wrapper.innerHTML = '';
-    });
-    window.addEventListener('click', e => {
-      if (e.target === modal) {
-        modal.style.display = 'none';
-        wrapper.innerHTML = '';
-      }
     });
   }
 
@@ -114,9 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function highlightActiveLink() {
     const currentPath = window.location.pathname.split('/').pop().replace(/\.html$/, '');
     const currentHash = window.location.hash;
-    // clear
     document.querySelectorAll('#main-nav a.active').forEach(a => a.classList.remove('active'));
-    // for each link
     document.querySelectorAll('#main-nav a').forEach(a => {
       try {
         const url = new URL(a.getAttribute('href'), window.location.origin);
@@ -124,12 +120,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const linkHash = url.hash;
         if (linkPath === currentPath && (linkHash === currentHash || (!linkHash && !currentHash))) {
           a.classList.add('active');
-          // if submenu item, mark its parent
           const sub = a.closest('ul.submenu');
           if (sub) {
             const parentLi = sub.closest('li');
-            const parentLink = parentLi.querySelector(':scope > a');
-            parentLink?.classList.add('active');
+            parentLi.querySelector(':scope > a')?.classList.add('active');
           }
         }
       } catch {}
@@ -142,13 +136,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const obs = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (!entry.isIntersecting) return;
-        const id = entry.target.id;
-        const a = document.querySelector(`#main-nav ul.submenu a[href$="#${id}"]`);
+        const a = document.querySelector(`#main-nav ul.submenu a[href$="#${entry.target.id}"]`);
         if (a) {
           document.querySelectorAll('#main-nav a.active').forEach(x => x.classList.remove('active'));
           a.classList.add('active');
-          const parentLi = a.closest('ul.submenu').closest('li');
-          parentLi.querySelector(':scope > a')?.classList.add('active');
+          a.closest('ul.submenu').closest('li')
+           .querySelector(':scope > a')?.classList.add('active');
         }
       });
     }, { rootMargin: '0px 0px -80% 0px' });
@@ -164,12 +157,86 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function initAccordion() {
-    const wrapper = document.querySelector('.project-wrapper');
-    const btn = wrapper.querySelector('.button-accordion');
-    btn.addEventListener('click', () => {
-      const isOpen = wrapper.classList.toggle('collapsed');
-      btn.setAttribute('aria-expanded', !isOpen);
-      btn.setAttribute('aria-label', isOpen ? 'Ouvrir le projet' : 'Fermer le projet');
+    document.querySelectorAll('.project-wrapper').forEach(wrapper => {
+      const btn = wrapper.querySelector('.button-accordion');
+      wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
+      btn.setAttribute('aria-expanded', 'true');
+      btn.setAttribute('aria-label', 'Fermer le projet');
+      btn.addEventListener('click', () => {
+        const collapsed = wrapper.classList.toggle('collapsed');
+        if (collapsed) {
+          wrapper.style.maxHeight = '5rem';
+          btn.setAttribute('aria-expanded', 'false');
+          btn.setAttribute('aria-label', 'Ouvrir le projet');
+        } else {
+          wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
+          btn.setAttribute('aria-expanded', 'true');
+          btn.setAttribute('aria-label', 'Fermer le projet');
+        }
+      });
+    });
+  }
+
+  function initEquipmentModals() {
+    const modal = document.createElement("div");
+    modal.className = "modal";
+    modal.innerHTML = `
+      <span class="close">&times;</span>
+      <div class="modal-content-wrapper"></div>
+    `;
+    document.body.appendChild(modal);
+    const wrapper = modal.querySelector('.modal-content-wrapper');
+    const closeBtn = modal.querySelector('.close');
+
+    function hide() {
+      modal.style.display = 'none';
+      wrapper.innerHTML = '';
+    }
+
+    closeBtn.addEventListener('click', hide);
+    modal.addEventListener('click', e => {
+      if (!e.target.closest('.modal-content-wrapper')) hide();
+    });
+
+    document.querySelectorAll('.list-block-line').forEach(line => {
+      const btn = line.querySelector('.button-equipment');
+      const list = line.querySelector('ul.equipments-list');
+      if (!btn || !list) return;
+      list.style.display = 'none';
+      btn.addEventListener('click', e => {
+        e.preventDefault(); e.stopPropagation();
+        wrapper.innerHTML = '';
+        const block = document.createElement('div');
+        block.classList.add('content-block','equipment-block');
+        const title = document.createElement('h3');
+        title.className = 'content-block-title';
+        title.textContent = 'Matériels pour ce chantier';
+        block.appendChild(title);
+        // reconstruire chaque ligne
+        list.querySelectorAll('li').forEach(rawItem => {
+          const text = rawItem.querySelector('p')?.textContent||'';
+          const link = rawItem.querySelector('a');
+          const li = document.createElement('li');
+          li.className = 'list-block-line';
+          const divText = document.createElement('div');
+          divText.className = 'list-block-text';
+          const p = document.createElement('p');
+          p.textContent = text;
+          divText.appendChild(p);
+          const divBtn = document.createElement('div');
+          divBtn.className = 'list-block-btn';
+          const a = document.createElement('a');
+          a.className = 'link';
+          a.href = link?.href||'#';
+          a.textContent = link?.textContent||'';
+          divBtn.appendChild(a);
+          li.appendChild(divText);
+          li.appendChild(divBtn);
+          block.appendChild(li);
+        });
+        wrapper.appendChild(block);
+        modal.style.display = 'block';
+      });
     });
   }
 });
