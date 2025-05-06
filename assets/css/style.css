@@ -540,6 +540,7 @@ img:hover, video:hover {
 
 .list-block {
     background: transparent;
+    box-shadow: none;
 }
 .list-block ul {
     counter-reset: list-counter;
@@ -622,6 +623,7 @@ img:hover, video:hover {
         width: 100%;
         max-width: 100%;
         background: var(--bg-color-primary);
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     }
     .project-wrapper:not(.collapsed) .list-block ul {
         overflow-y: auto;
@@ -635,6 +637,7 @@ img:hover, video:hover {
 /* Expanded */
 .project-wrapper:not(.collapsed) .list-block.expanded {
     background: var(--bg-color-primary);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 .project-wrapper:not(.collapsed) .list-block.expanded .button-expand-mobile {
     position: inherit;
