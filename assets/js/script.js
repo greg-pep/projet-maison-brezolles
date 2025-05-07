@@ -193,7 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const modal = document.createElement("div");
     modal.className = "modal";
     modal.innerHTML = `
-      <span class="close">&times;</span>
+      <span class="close"><i class="close-icn fa-solid fa-xmark"></i></span>
       <div class="modal-content-wrapper"></div>
     `;
     document.body.appendChild(modal);
