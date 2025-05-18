@@ -569,10 +569,15 @@ img:hover, video:hover {
     width: 100%;
     height: 230px;
 }
-.media-block .video-thumb {
+.media-block p {
+    color: gray;
+    font-size: 14px;
+    margin: 5px 0;
+}
+.video-thumb {
     position: relative;
 }
-.media-block .video-thumb::after {
+.video-thumb::after {
   content: "\f04b";
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
@@ -584,11 +589,6 @@ img:hover, video:hover {
   font-size: 2.5em;
   color: #fff;
   pointer-events: none;
-}
-.media-block p {
-    color: gray;
-    font-size: 14px;
-    margin: 5px 0;
 }
 @media (min-width: 680px) {
     .media-block {
