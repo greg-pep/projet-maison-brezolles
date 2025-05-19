@@ -224,7 +224,7 @@ document.addEventListener("DOMContentLoaded", () => {
         block.classList.add('content-block','equipment-block');
         const title = document.createElement('h3');
         title.className = 'content-block-title';
-        title.textContent = 'Matériels pour ce chantier';
+        title.textContent = 'Matériels et exemples pour ce chantier';
         block.appendChild(title);
         const ul = document.createElement('ul');
         list.querySelectorAll('li').forEach(rawItem => {
