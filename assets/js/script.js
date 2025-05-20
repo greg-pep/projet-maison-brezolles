@@ -243,6 +243,8 @@ document.addEventListener("DOMContentLoaded", () => {
           a.className = 'link';
           a.href = link?.href || '#';
           a.textContent = link?.textContent || '';
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
           divBtn.appendChild(a);
           li.appendChild(divText);
           li.appendChild(divBtn);
