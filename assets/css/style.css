@@ -20,6 +20,7 @@
 
     --active-color: #a8b9ff;
     --link-color: #ab82c3;
+    --validate-color: #58af8b;
 
     --layout-width: 1130px;
     --submenu-transition-duration: 0.25s;
@@ -628,7 +629,7 @@ img:hover, video:hover {
 .list-block-line {
     counter-increment: list-counter;
     position: relative;
-    padding: 10px 0 10px 20px;
+    padding: 10px 0 10px 23px;
     display: flex;
     flex-direction: row;
     border-top: 1px solid #d8d8d8;
@@ -652,11 +653,35 @@ img:hover, video:hover {
 .list-block-top {
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
+}
+.list-block-top .content-block-title {
+    margin-bottom: 10px;
 }
 .list-block-text {
     width: 100%;
     padding-right: 15px;
     font-size: 14px;
+}
+.list-block-line.madeByUs {
+    color: var(--validate-color);
+}
+.list-block-line.madeByUs::before {
+    color: var(--secondary-color);
+}
+legend.madeByUs {
+    font-size: 12px;
+    margin-bottom: 15px;
+    color: rgb(176, 176, 176);
+}
+legend.madeByUs::before {
+    content:"";
+    display: inline-flex;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-right: 0.5rem;
+    border-radius: 50%;
+    background: var(--validate-color);
 }
 .list-block-btn {
     display: flex;
