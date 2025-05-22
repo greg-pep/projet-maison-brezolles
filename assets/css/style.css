@@ -5,8 +5,8 @@
 :root {
     --primary-color: #222;
     --secondary-color: #72a2c4;
-    --secondary-color-on-dark: #9ac5e3;
     --tertiary-color: #7a7a7a;
+    --tertiary-color-on-dark: #b5b8ba;
 
     --light-color: white;
     --dark-lighter-color: #eee; 
@@ -43,14 +43,14 @@ body {
 header {
     position: relative;
     padding-top: 15px;
-    color: var(--secondary-color-on-dark);
+    color: var(--tertiary-color-on-dark);
     text-align: center;
     background-color: var(--header-color);
 }
 header h1 {
     font-size: 16px;
     margin-bottom: 15px;
-    font-weight: 300;
+    font-weight: 400;
 }
 main {
     margin: 0 auto;
