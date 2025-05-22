@@ -11,7 +11,7 @@
     --light-color: white;
     --dark-lighter-color: #eee; 
 
-    --header-color: #00274d;
+    --header-color: #00101f;
     --nav-menu-color: #004080;
 
     --bg-color-primary: white;
@@ -50,7 +50,7 @@ header {
 header h1 {
     font-size: 17px;
     margin-bottom: 15px;
-    font-weight: 400;
+    font-weight: 300;
 }
 main {
     margin: 0 auto;
@@ -338,7 +338,7 @@ img:hover, video:hover {
 }
 .button-middle, .button-small {
     color: white;
-    background: #0077cc;
+    background: var(--nav-menu-color);
 }
 .button-middle {
     font-size: 16px;
@@ -653,6 +653,9 @@ img:hover, video:hover {
 .list-block-top {
     display: flex;
     justify-content: space-between;
+}
+.list-block-top-left {
+    display: flex;
     flex-direction: column;
 }
 .list-block-top .content-block-title {
