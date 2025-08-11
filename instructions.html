@@ -16,6 +16,13 @@
     </header>
 
     <main>
+        <!--<div id="login">
+            <h2>Accès réservé</h2>
+            <input type="password" id="pwd" placeholder="Mot de passe">
+            <button onclick="checkPassword()">Valider</button>
+            <p id="error" style="color:red; display:none;">Mot de passe incorrect</p>
+        </div>-->
+
         <div id="content">
             <section id="notices" class="content-block section-box">
                 <h2 class="content-block-title">I - Notices & emplacements</h2>
@@ -206,5 +213,18 @@
     <footer>
         <p>&copy; 2025 Projet Immobilier</p>
     </footer>
+
+    <!--<script>
+        const PASSWORD = "1234";
+        function checkPassword() {
+            const input = document.getElementById("pwd").value;
+            if (input === PASSWORD) {
+                document.getElementById("login").style.display = "none";
+                document.getElementById("content").style.display = "block";
+            } else {
+                document.getElementById("error").style.display = "block";
+            }
+        }
+    </script>-->
 </body>
 </html>
