@@ -376,7 +376,13 @@ p {
 .modal-content:hover {
     cursor: default;
     transition: none;
-    transform: none;
+    transform: none; 
+}
+img.modal-content:hover {
+    transform: scale(2);
+    transform-origin: top;
+    transition: transform ease-in 0.2s;
+    cursor: zoom-in;
 }
 .close {
     position: absolute;
