@@ -654,8 +654,14 @@ table .value {
     background: transparent;
     box-shadow: none;
 }
+.list-block.in-column {
+    flex-direction: column;
+}
 .list-block ul {
     counter-reset: list-counter;
+}
+.list-block h3 {
+    margin-bottom: 5px;
 }
 .list-block-line {
     counter-increment: list-counter;
@@ -680,6 +686,14 @@ table .value {
 }
 .list-block-line:first-child::before {
     top: 0;
+}
+.list-block.in-column .list-block-line {
+    flex-direction: column;
+}
+.list-block-line ul li {
+    font-size: 16px;
+    list-style: disc;
+    margin-left: 25px;
 }
 .list-block-top {
     display: flex;

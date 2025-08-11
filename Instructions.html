@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Instructions</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script defer src="assets/js/script.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Projet de rénovation – Maison à Brézolles</h1> 
+        <div id="menu-placeholder"></div>
+    </header>
+
+    <main>
+        <div id="login">
+            <h2>Accès réservé</h2>
+            <input type="password" id="pwd" placeholder="Mot de passe">
+            <button onclick="checkPassword()">Valider</button>
+            <p id="error" style="color:red; display:none;">Mot de passe incorrect</p>
+        </div>
+
+        <div id="content" style="display:none;">
+            <section id="notices" class="content-block section-box">
+                <h2 class="content-block-title">I - Notices & emplacements</h2>
+                <div class="content-block-description">
+                    <ul class="list-block in-column">
+                        <li class="list-block-line">
+                            <h3>Notices appareils ménagers :</h3>
+                            <p>- Placard d’entrée</p>
+                        </li>
+                        <li class="list-block-line">
+                            <h3>Clés, télécommandes :</h3>
+                            <p>- Placard d’entrée (intérieur, 2e porte)</p>
+                        </li> 
+                        <li class="list-block-line">
+                            <h3>Accessoires tracteur tondeuse (rayonnage gauche, 2e salle sous-sol) :</h3> 
+                            <p>- Huile moteur, bidon pour dosage à 1,4L, clé écrou pour vidange (dernière vidange : juin 2024)</p>
+                            <p>- Carters, éjecteur latéral (à la place du mulching) pour herbe très haute</p>
+                        </li>
+                        <li class="list-block-line">
+                            <h3>Tronçonneuse et accessoires :</h3>
+                            <p>- Sur le groupe électrogène, Outils bûcheronnage, taupiers à côté</p>
+                            <p>- C'est l'agence "Espace verts IDF" qui a abattu les arbres derrière la clôture</p>
+                            <p>- Un gros tronc reste dans l’enclos après abattage pro (IDF)</p>
+                        </li>
+                        <li class="list-block-line">
+                            <h3>Déchets :</h3>
+                            <p>- Local avec bacs tri, peintures extérieures, brouette</p>
+                        </li> 
+                        <li class="list-block-line">
+                            <h3>Boîte aux lettres :</h3>
+                            <p>- S’ouvre sans clé en tournant le bouton-serrure</p>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="acces-globaux" class="content-block section-box">
+                <h2 class="content-block-title">II. Accès globaux</h2>
+                <div class="content-block-description">
+                    <ul class="list-block in-column">
+                        <li class="list-block-line">
+                            <h3>Entrée principale :</h3>
+                            <p>- Portier avec sonnette et interphone (caméra HS)</p>
+                            <p>- Ouverture/fermeture de la barrière principale :<p>
+                            <ul>
+                                <li>Avec bouton poussoir (Sous la platine antenne derrière le pilier)</li>
+                                <li>Avec l'interphone (En appuyant sur le bouton milieu gauche pour allumer, puis sur le bouton icône clé, avec impulsion vers la droite)</li>
+                                <li>Avec dévérouillage manuel (En utilisant le verrou en bas du portail en bois)</li>
+                                <li>Avec le bouton de la télécommande bifonctionnelle (Bouton de gauche)</li>
+                            </ul>
+                        </li>
+                        <li class="list-block-line">
+                            <h3>Entrée annexe :</h3>
+                            <p>- Sente du trou de l’enfer (Code cadenas -> 'DOMI')</p>
+                            <p>
+                                - Au Sud-Est, parcelle 591 clôturée
+                                (Laissée en l'état de l'usage préalable à l'expropriation. Cf plan réseaux extérieurs)
+                            </p>
+                        </li>
+                        <li class="list-block-line">
+                            <h3>Porte garage :</h3>
+                            <p>- Depuis l'intérieur, par bouton poussoir (Au pied de l'escalier du sous-sol donnant accès à l'étage)</p>
+                            <p>- Avec télécommandes (Spécifique de garage ou avec bouton de droite de la bifonctionneile)</p>
+                            <p>- Depuis l'extérieur, par shunt des plots 3 et 4 de la platine antenne (cf. schéma)</p>
+                            <p>- Manuellement en débrayant moteur (en baissant le levier muni d'une cordelette)</p>
+                        </li>
+                        <li class="list-block-line">
+                            <h3>Types de fermetures :</h3>
+                            <p>- Porte d'entrée -> Fermeture simple par poignée et clé à 3 points d'ancrage, à double tour</p>
+                            <p>- 3 portes-fenêtres -> Fermeture 3 points par remontée des poignées intérieures empêchant ouverture depuis extérieure</p>
+                        </li>
+                        <li class="list-block-line">
+                            <h3>Accès au grenier :</h3>
+                            <p>- Par dortoir des combines (2 boutons à dévisser pour entever un premier panneau puis poignées pour enlever un 2ème panneau d'isolation)</p>
+                            <p>
+                                - Par trappe dans le couloir :<br/>
+                                Utiliser la perche placée ans la salle d'eau de l'étage.<br/>
+                                Se placer sous la trappe vers la chambre (interrupteur avec voyant pour éclairage du grenier).<br/>
+                                Glisser le crochet de la perche dans l'orifice de la targette et tirer vers la droite pour libérer la 1ère trappe à charnières.
+                                <br/><br/>
+                                Mettre le bout de la perche dans le 1er trou (vers loggia, Sud) de cette 2ème trappe.<br/>
+                                Soulever pour faire glisser la trappe sur le sol du grenier en direction de la loggia jusqu'à ce que la perche touche le bord du passage.<br/>
+                                Perche dans le 2ème trou (vers la chambre du fond), et glisser la trappe sur le sol du grenier jusqu'à ce que la perche touche le bord du trou.
+                                <br/><br/>
+                                Veiller à faire glisser la trappe parallèlement au passage afin d'éviter que, mise de travers, elle ne bascule sur soi.<br/>
+                                Perche dans la goulotte, puis pivoter l'échelle vers le trou (mouvement vers le haut) et déverrouiller la rallonge du bas en glissant vers le sol.
+                                <br/><br/>
+                                Pour fermer, effectuer les opérations inverses.
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="circuits-eau" class="content-block section-box">
+                <h2 class="content-block-title">III. Circuits d’eau</h2>
+                <div class="content-block-description">
+                    <ul class="list-block in-column">
+                        <li class="list-block-line">
+                            <h3>Compteur arrivée d'eau et regard tout à l'égout :</h3>
+                            <p>- Accessible à l'extérieur, sur le trottoir</p>
+                        </li>
+                        <li class="list-block-line">
+                            <h3>Arrivée par la fosse à droite en entrant :</h3>
+                            <p>- Vanne avec purge pour l'alimentation générale.</p>
+                            <p>
+                                - Vannes avec purge pour robinet extérieur sur le mur de gauche en entrant<br/>
+                                (À purger l'hiver pour éviter éclatement par le gel)
+                            </p>
+                        </li>
+                        <li class="list-block-line">
+                            <h3>Arrivée sous-sol (2ême salle, au sud) :</h3>
+                            <p>- Vanne d'arrêt général pour la maison</p>
+                            <p>- Chauffe-eau avec système évacuation eaux usées</p>
+                            <p>
+                                - Vanne avec purge pour robinet extérieur à l'angle Sud-Ouest de la maison<br/>
+                                (À purger l'hiver pour éviter éclatement par le gel)
+                            </p>
+                        </li>
+                        <li class="list-block-line">
+                            <h3>Points d'eau du garage :</h3>
+                            <p>- Eau chaude, eau froide, évacuation eaux usées pour l'évier</p>
+                            <p>
+                                - Vanne d'arrêt avec purge pour robinets extérieurs, l'un à l'ange Nord Est de la maison, l'autre à l'angle intérieur du L de la propriété<br/>
+                                (À purger l'hiver pour éviter éclatement par le gel)
+                            </p>
+                        </li>
+                        <li class="list-block-line">
+                            <h3>Autres points d'eau chaude, froide, évacuation eaux usées :</h3>
+                            <p>- Au rdc WC lavabo rdc, évier lave-vaisselle cuisine, évier lave-linge lingerie</p>
+                            <p>
+                                - À l'étage, WC lavabo douche salle d'eau, lavabo, baignoire, douche salle de bains<br/>
+                                (2 regards dans les WC, dont un dans le placard sous le tavabo, un sous la baignotre)
+                            </p>
+                        </li>
+                        <li class="list-block-line">
+                            <h3>Les eaux pluviales:</h3>
+                            <p>
+                                - À l'exception de la véranda qui s'écoule dans un puisard à l'angle Nord-Ouest de la maison,<br/>
+                                tout le reste des précipitations se déverse dans le bassin du bas.<br/>
+                                - Il existe aux angles Sud-ouest, Sud-est, Nord-est de la maison, des possibilités d'évacuation puisards, en ouvrant les bouchons des regards.
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="circuits-electriques" class="content-block section-box">
+                <h2 class="content-block-title">IV. Circuits électriques</h2>
+                <div class="content-block-description">
+                    <ul class="list-block in-column">
+                        <li class="list-block-line">
+                            <h3>Circuits intérieurs et extérieurs</h3>
+                            <p><strong>Cf. Schema Reseaux exterieurs pour :</strong></p>
+                            <p>- Arrivée jusqu'au tableau electrique au sous-sol.</p>
+                            <p>- Augmentations extérieures des prises aux quatre coins de la maison.</p>
+                            <p>- De la piscine et son local pompe à chaleur.</p>
+                            <p>- Des bassins (coffret de répartition, prise pompe de relevage, prise filtre U.V).</p></br>
+                            
+                            <p><strong>Cf. schema de distribution interieur :</strong></p>
+                            <p>
+                                - Du tableau electrique principal pour usages comestiques et chauffage</br>
+                                (thermostat d'ambiance à droite en entrant cans le salon).
+                            </p>
+                            <p>
+                                - Du tableau de répartition des combles et du 1er étage</br>
+                                (coffrage en bois dans le dortoir).
+                            </p>
+                            <p>- De la piscine.</p>
+                        </li>
+                        <li class="list-block-line">
+                            <h3>Circuits courants faibles</h3>
+                            <p><strong>Cf. Schémas Réseaux extérieurs et portiers :</strong></p>
+                            <p>- À droite de l'entrée, arrivée fibre, branchement câble Ethernet qui dessert le bureau, branchements HP du salon.</p>
+                            <p>- À gauche de l'entrée, portier moniteur, son adaptateur d'alimentation dans le placard.</p>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="description" class="content-block">
+                <h2 class="content-block-title">Description générale</h2>
+                <p class="intro">bla bla</p>
+                <img loading="lazy" src="assets/images/instructions - circuit_portes.jpg" alt="Circuit des portes">
+            </section>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Projet Immobilier</p>
+    </footer>
+
+    <script>
+        const PASSWORD = "1234";
+        function checkPassword() {
+            const input = document.getElementById("pwd").value;
+            if (input === PASSWORD) {
+                document.getElementById("login").style.display = "none";
+                document.getElementById("content").style.display = "block";
+            } else {
+                document.getElementById("error").style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
