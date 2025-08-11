@@ -453,30 +453,6 @@ table .value {
     }
 }
 
-/* Plan */
-.plan-block {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-}
-.plan-block img {
-    max-width: 100%;
-    height: auto;
-    object-fit: contain;
-}
-@media (min-width: 650px) {
-    .plan-block {
-        flex-direction: row;
-    }
-    .plan-block img {
-        max-width: 30%;
-        height: 240px;
-        padding: 15px;
-    }
-}
-
 /* Simulation */
 #simulations .home-video-wrapper {
     display: flex;
@@ -812,6 +788,32 @@ table .value {
     }
     .project-wrapper:not(.collapsed) .list-block .button-icon {
         display: none;
+    }
+}
+/* Images list */
+.list-imgs {
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+}
+.list-imgs img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+@media (min-width: 650px) {
+    .list-imgs {
+        flex-direction: row;
+    }
+    .list-imgs img {
+        max-width: 30%;
+        width: 245px;
+        max-height: 200px;
+        height: auto;
+        padding: 15px;
     }
 }
 
